@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
 
@@ -13,6 +14,7 @@ export default function LoginForm({ onClose }) {
     return re.test(email);
   };
 
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -32,6 +34,7 @@ export default function LoginForm({ onClose }) {
       localStorage.setItem('token', token);
       alert('Đăng nhập thành công!');
       onClose();
+      navigate('/userManagement');
     } catch (err) {
       setError('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
     }
